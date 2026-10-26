@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GitHub 月度精选 · 2026-10</title><style>
+:root{
+  --bg:#f4f6f8; --card:#ffffff; --ink:#1a1d21; --ink2:#57606a; --ink3:#8b949e;
+  --line:#e3e7eb; --red:#d92b2b; --red-soft:#fdecec; --blue:#2563eb; --blue-soft:#eaf1fe;
+  --amber:#c77800; --amber-soft:#fdf3e2; --green:#1a7f4b; --green-soft:#e8f6ee;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.72; font-size:15px; -webkit-font-smoothing:antialiased;
+  padding:0 0 56px;
+}
+.wrap{max-width:780px;margin:0 auto;padding:0 16px}
+
+/* header */
+.hero{background:var(--card);border-bottom:1px solid var(--line);padding:30px 0 26px;margin-bottom:22px}
+.hero .kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
+  letter-spacing:.14em;color:var(--red);background:var(--red-soft);padding:5px 12px;border-radius:999px}
+.hero h1{font-size:29px;line-height:1.3;margin:16px 0 8px;letter-spacing:-.01em}
+.hero .sub{color:var(--ink2);font-size:14px}
+.hero .period{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero .period span{font-size:12.5px;color:var(--ink2);background:var(--bg);
+  border:1px solid var(--line);padding:4px 11px;border-radius:7px}
+
+/* section */
+section{margin-bottom:26px}
+h2{font-size:19px;display:flex;align-items:center;gap:10px;margin-bottom:4px}
+h2 .dot,.bh .dot{width:9px;height:9px;border-radius:3px;flex:none}
+h2 .cnt{margin-left:auto;font-size:12px;font-weight:500;color:var(--ink3)}
+.sec-hint{color:var(--ink2);font-size:13.5px;margin:6px 0 14px}
+.legend{display:flex;flex-wrap:wrap;gap:7px 15px;margin:11px 0 16px;font-size:11.5px;
+  color:var(--ink2);background:var(--card);border:1px solid var(--line);
+  border-radius:10px;padding:10px 14px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend .basis{margin-left:0}
+
+/* overview */
+.ov{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+.ov h3{font-size:17px;margin-bottom:12px}
+.ov ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ov li{position:relative;padding-left:20px;font-size:14.3px;color:#333a42}
+.ov li::before{content:"";position:absolute;left:4px;top:10px;width:6px;height:6px;
+  border-radius:2px;background:var(--red);opacity:.75}
+
+/* board */
+.board{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid var(--line);
+  text-decoration:none;color:inherit}
+.row:first-child{border-top:none}
+.rk{flex:none;width:25px;height:25px;border-radius:7px;display:grid;place-items:center;
+  font-size:12.5px;font-weight:700;background:var(--bg);color:var(--ink2)}
+.rk.top{background:linear-gradient(135deg,#e03131,#b31f1f);color:#fff}
+.rk.t2{background:var(--blue);color:#fff}
+.nm{flex:1;min-width:0}
+.nm b{display:block;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.nm i{font-style:normal;font-size:12px;color:var(--ink2);display:block;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.bh{font-size:15px;font-weight:700;display:flex;align-items:center;gap:9px;margin:24px 0 4px}
+.bh .cnt{font-size:12px;font-weight:500;color:var(--ink3);margin-left:auto}
+.bh:first-of-type{margin-top:6px}
+.cell{flex:none;text-align:right;min-width:74px}
+.cell em{display:block;font-style:normal;font-size:14.5px;font-weight:700;color:var(--red)}
+.cell u{text-decoration:none;font-size:11px;color:var(--ink3)}
+.tagbar{flex:none;width:56px;text-align:right}
+.hit{display:inline-block;font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;
+  background:var(--amber-soft);color:var(--amber);letter-spacing:.02em}
+
+/* project card */
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;
+  margin-bottom:14px}
+.pcard .ph{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:13px}
+.pcard .phl{flex:1;min-width:190px}
+.pcard .repo{font-size:14px;font-weight:600;color:var(--ink2);text-decoration:none;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all}
+.pcard .repo:hover{color:var(--blue)}
+.cnname{font-size:19px;font-weight:700;letter-spacing:-.01em;margin-top:4px;line-height:1.45}
+.cnname::before{content:"";display:inline-block;width:4px;height:16px;background:var(--red);
+  border-radius:2px;margin-right:9px;vertical-align:-2px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.bdg{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.bdg.red{background:var(--red-soft);color:var(--red)}
+.bdg.amber{background:var(--amber-soft);color:var(--amber)}
+.bdg.blue{background:var(--blue-soft);color:var(--blue)}
+.bdg.grey{background:var(--bg);color:var(--ink2);border:1px solid var(--line)}
+
+.nums{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);border-radius:10px;
+  overflow:hidden;margin:12px 0 14px}
+.nums div{flex:1;min-width:88px;padding:8px 12px;border-left:1px solid var(--line)}
+.nums div:first-child{border-left:none}
+.nums .k{font-size:11px;color:var(--ink3);display:block}
+.nums .v{font-size:15px;font-weight:700}
+.nums .v.r{color:var(--red)}
+
+.fields{display:flex;flex-direction:column;gap:9px}
+.f{display:flex;gap:9px;font-size:14.2px}
+.f .lab{flex:none;width:72px;font-size:12px;font-weight:700;color:var(--ink2);
+  padding-top:2px;text-align:right}
+.f .val{flex:1;color:#333a42}
+.f .val.ai{color:var(--ink2);font-size:13.6px}
+
+.you{margin-top:11px;border-radius:10px;padding:11px 14px;font-size:13.8px;
+  border-left:3px solid var(--line);background:var(--bg)}
+.you.hi{border-left-color:var(--red);background:var(--red-soft)}
+.you.mid{border-left-color:var(--blue);background:var(--blue-soft)}
+.you.lo{border-left-color:var(--ink3);background:var(--bg)}
+.you b{font-size:12px;display:block;margin-bottom:3px;letter-spacing:.02em}
+
+.rate{display:flex;align-items:center;gap:9px;margin:14px 0 0;padding-top:13px;
+  border-top:1px dashed var(--line);flex-wrap:wrap}
+.stars{font-size:16px;letter-spacing:2px;color:#e0a52e}
+.stars .off{color:#d6dbe0}
+.rate .txt{font-size:12.5px;color:var(--ink2);flex:1;min-width:180px}
+.ratio-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;
+  background:var(--red-soft);color:var(--red)}
+
+.cons{margin-top:14px}
+.cons .t{font-size:12px;font-weight:700;color:var(--ink2);margin-bottom:7px;letter-spacing:.02em}
+.cons ol{list-style:none;counter-reset:c;display:flex;flex-direction:column;gap:7px}
+.cons li{counter-increment:c;position:relative;padding-left:24px;font-size:13.6px;color:#3b424a}
+.cons li::before{content:counter(c);position:absolute;left:0;top:2px;width:16px;height:16px;
+  border-radius:5px;background:var(--bg);border:1px solid var(--line);color:var(--ink3);
+  font-size:10px;font-weight:700;display:grid;place-items:center}
+.basis{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:4px;
+  background:var(--bg);border:1px solid var(--line);color:var(--ink3);margin-left:7px;
+  vertical-align:1px;white-space:nowrap}
+.basis.doc{background:var(--green-soft);border-color:#bfe3cf;color:var(--green)}
+.basis.part{background:var(--blue-soft);border-color:#c6d8fb;color:var(--blue)}
+.basis.warn{background:var(--amber-soft);border-color:#f0dcb4;color:var(--amber)}
+.cons .q{display:block;margin:3px 0 1px;font-size:11.5px;line-height:1.5;color:var(--ink3);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-word}
+.cons .q b{color:var(--ink2);font-weight:600}
+
+footer{margin-top:30px;padding:18px 20px;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;color:var(--ink2);font-size:12.5px}
+footer .l{display:flex;gap:8px;margin-bottom:7px;flex-wrap:wrap}
+footer .l b{color:var(--ink)} footer .l span{color:var(--ink3)}
+footer p{margin-top:8px;line-height:1.65}
+@media(max-width:520px){
+  .hero h1{font-size:23px}
+  .nums div{min-width:50%}
+  .f .lab{width:100%;text-align:left;padding-top:0}
+  .f{flex-direction:column;gap:1px}
+}
+</style></head><body>
+<div class="hero"><div class="wrap">
+  <span class="kicker">GITHUB MONTHLY · 2026-10</span>
+  <h1>GitHub 月度精选</h1>
+  <div class="sub">本月周榜去重汇总 · 按上榜次数与推荐指数重排</div>
+  <div class="period">
+    <span>周期 2026-10-05 ~ 2026-11-01</span>
+    <span>汇总 4 期周报</span>
+    <span>去重后 29 个项目</span>
+    <span>生成于 2026-10-26 08:24</span>
+  </div>
+</div></div>
+<div class="wrap">
+  <section><div class="ov"><h3>AI工具与游戏移植持续升温</h3><ul><li>跨周反复上榜的12个项目揭示了AI工具生态的稳定性，其中视频渲染框架HyperFrames连续4周上榜，平均推荐4.2★，显示出成熟度；Claude相关工具如Cursor插件库(3周,4.3★)和AI记忆助手(2周,4.5★)持续获得开发者认可，形成稳定的技术栈。</li><li>本月题材呈现两极分化：一方面AI编程助手、Claude插件等开发工具持续火热，另一方面游戏移植工具AnyPS5以最高周增速80.9%和星榜第1的成绩异军突起，表明游戏开发与跨平台工具正成为新兴热点，题材从纯AI向实用型工具扩展。</li><li>热度与质量存在明显差异：RAD调试器上榜2次但仅2.5★推荐，反映高热度但质量一般；逆向工程助手虽仅上榜1次却获5.0★满分，说明高质量项目可能因领域限制曝光不足；AI智能体编排(2周,3.5★)则代表热度与质量平衡的中坚力量。</li><li>下月应重点关注Claude插件生态的扩展速度与质量，以及游戏移植工具AnyPS5的后续表现，同时观察AI记忆共享、上下文压缩器等辅助工具是否会从单周热度发展为常青项目，评估AI辅助开发工具的实际落地效果。</li></ul></div></section>
+  <section>
+    <h2><span class="dot" style="background:#c77800"></span>本月榜单 Top15
+      <span class="cnt">按 上榜次数 ×（平均推荐指数+1）排序</span></h2>
+    <div class="sec-hint">只在某一周出现过一次的项目分值最低，反复上榜的项目分值最高——
+    这是把「一时热度」和「真正的常青项目」区分开的办法。</div>
+    <div class="board"><a class="row" href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noopener"><span class="rk top">1</span><span class="nm"><b>视频渲染框架 / heygen-com/hyperframes</b><i>上榜 4 次 · 平均 4.2★</i></span><span class="tagbar"><span class="hit">4 次</span></span><span class="cell"><em>8.8%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/cursor/plugins" target="_blank" rel="noopener"><span class="rk t2">2</span><span class="nm"><b>Cursor插件库 / cursor/plugins</b><i>上榜 3 次 · 平均 4.3★</i></span><span class="tagbar"><span class="hit">3 次</span></span><span class="cell"><em>13.5%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/boykopovar/AnyPS5" target="_blank" rel="noopener"><span class="rk t2">3</span><span class="nm"><b>游戏移植工具 / boykopovar/AnyPS5</b><i>上榜 3 次 · 平均 3.7★</i></span><span class="tagbar"><span class="hit">3 次</span></span><span class="cell"><em>80.9%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/thedotmack/claude-mem" target="_blank" rel="noopener"><span class="rk">4</span><span class="nm"><b>AI记忆助手 / thedotmack/claude-mem</b><i>上榜 2 次 · 平均 4.5★</i></span><span class="tagbar"><span class="hit">2 次</span></span><span class="cell"><em>4.1%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/danyuchn/asd-ste100-skill" target="_blank" rel="noopener"><span class="rk">5</span><span class="nm"><b>技术英语简化工具 / danyuchn/asd-ste100-skill</b><i>上榜 2 次 · 平均 4.0★</i></span><span class="tagbar"><span class="hit">2 次</span></span><span class="cell"><em>21.6%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/earthtojake/text-to-cad" target="_blank" rel="noopener"><span class="rk">6</span><span class="nm"><b>文本转CAD / earthtojake/text-to-cad</b><i>上榜 2 次 · 平均 4.0★</i></span><span class="tagbar"><span class="hit">2 次</span></span><span class="cell"><em>12.9%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/mattpocock/skills" target="_blank" rel="noopener"><span class="rk">7</span><span class="nm"><b>AI编程助手技能包 / mattpocock/skills</b><i>上榜 2 次 · 平均 4.0★</i></span><span class="tagbar"><span class="hit">2 次</span></span><span class="cell"><em>3.6%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/tester-army/e2e" target="_blank" rel="noopener"><span class="rk">8</span><span class="nm"><b>端到端测试框架 / tester-army/e2e</b><i>上榜 2 次 · 平均 3.5★</i></span><span class="tagbar"><span class="hit">2 次</span></span><span class="cell"><em>74.1%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/ranxianglei/billion-context" target="_blank" rel="noopener"><span class="rk">9</span><span class="nm"><b>上下文压缩器 / ranxianglei/billion-context</b><i>上榜 2 次 · 平均 3.5★</i></span><span class="tagbar"><span class="hit">2 次</span></span><span class="cell"><em>33.6%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/mvschwarz/openrig" target="_blank" rel="noopener"><span class="rk">10</span><span class="nm"><b>AI智能体编排 / mvschwarz/openrig</b><i>上榜 2 次 · 平均 3.5★</i></span><span class="tagbar"><span class="hit">2 次</span></span><span class="cell"><em>30.3%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/anthropics/claude-plugins-official" target="_blank" rel="noopener"><span class="rk">11</span><span class="nm"><b>Claude插件市场 / anthropics/claude-plugins-official</b><i>上榜 2 次 · 平均 3.5★</i></span><span class="tagbar"><span class="hit">2 次</span></span><span class="cell"><em>11.2%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/EpicGames/raddebugger" target="_blank" rel="noopener"><span class="rk">12</span><span class="nm"><b>RAD调试器 / EpicGames/raddebugger</b><i>上榜 2 次 · 平均 2.5★</i></span><span class="tagbar"><span class="hit">2 次</span></span><span class="cell"><em>9.4%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/morluto/rea" target="_blank" rel="noopener"><span class="rk">13</span><span class="nm"><b>逆向工程助手 / morluto/rea</b><i>上榜 1 次 · 平均 5.0★</i></span><span class="cell"><em>71.1%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/storytold/artcraft" target="_blank" rel="noopener"><span class="rk">14</span><span class="nm"><b>艺术创作引擎 / storytold/artcraft</b><i>上榜 1 次 · 平均 4.0★</i></span><span class="cell"><em>50.0%</em><u>最高周增速</u></span></a><a class="row" href="https://github.com/cloudflare/security-audit-skill" target="_blank" rel="noopener"><span class="rk">15</span><span class="nm"><b>安全审计技能 / cloudflare/security-audit-skill</b><i>上榜 1 次 · 平均 4.0★</i></span><span class="cell"><em>32.2%</em><u>最高周增速</u></span></a></div>
+  </section>
+  <section>
+    <h2><span class="dot" style="background:#2563eb"></span>项目详解
+      <span class="cnt">15 个项目</span></h2>
+    <div class="sec-hint">取自各周周报中最新一次的分析结果，已按本月表现重排。</div>
+    
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/heygen-com/hyperframes" target="_blank" rel="noopener">heygen-com/hyperframes</a>
+      <div class="cnname">视频渲染框架</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 4 次</span><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.5</span><span class="bdg blue">飙升榜 No.6</span><span class="bdg grey">TypeScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">72,143</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+5,612</span></div>
+    <div><span class="k">周增速</span><span class="v r">7.8%</span></div>
+    <div><span class="k">fork / star</span><span class="v">9.0%</span></div>
+    <div><span class="k">许可证</span><span class="v">Apache-2.0</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">83.6%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">240</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">HyperFrames 是一个将 HTML、CSS 和媒体内容转换为确定性 MP4 视频的开源框架，专为 AI 编程代理设计。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">它解决了将网页内容自动转换为视频的复杂流程，简化了视频生成过程，特别适合需要自动化生成视频内容的场景。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    HyperFrames 主要用于将 HTML/CSS 转换为视频，与您的三维可视化、点云处理和GIS工作领域直接关联性较低。但如果您需要将三维模型展示或GIS界面导出为视频演示材料，可作为辅助工具使用。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★★<span class="off"></span></span>
+    <span class="txt">加分项：高活跃度、完整功能文档；扣分项：尚未发现明显缺点。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>主要依赖特定的 AI 编程代理使用，如 Claude Code、Codex 或 Cursor。 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Using Claude Code, Codex, Cursor, or another coding agent? Run `npx hyperframes skills update` once, then ask your agent to make a video.（逐字核对通过）</span></li><li>部分功能需要额外安装，增加使用复杂度。 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> The picker opens with nothing pre-selected — the **Core Skills** group is all you need; `/slideshow`, `/remotion-to-hyperframes` and `/figma` install on demand.（逐字核对通过）</span></li><li>项目创建时间较新，长期稳定性有待观察。 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>初始化过程不够直观，仅当核心集缺失时才会安装。 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Standalone installs stay lean after that: `npx hyperframes init` installs the **core set** only when it is missing and never touches a skill you already have（逐字核对通过）</span></li><li>主要面向 AI 编程代理和特定工作流程，普通用户使用门槛较高。 <span class="basis">通用判断</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/cursor/plugins" target="_blank" rel="noopener">cursor/plugins</a>
+      <div class="cnname">Cursor插件库</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 3 次</span><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.10</span><span class="bdg blue">飙升榜 No.5</span><span class="bdg grey">TypeScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">12,748</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+1,717</span></div>
+    <div><span class="k">周增速</span><span class="v r">13.5%</span></div>
+    <div><span class="k">fork / star</span><span class="v">9.8%</span></div>
+    <div><span class="k">许可证</span><span class="v">无</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">17.6%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">281</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">Cursor编辑器的官方插件集合，包含开发工具、生产力工具和第三方服务集成。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">提供丰富的AI辅助开发工具，集成多种第三方服务，扩展编辑器功能，提升开发效率和工作流自动化能力。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    虽然Cursor插件库主要是为代码编辑服务的，但其中一些自动化工具和API集成思路可能对工业软件实施中的脚本编写和数据对接有参考价值。特别是CLI工具模式、API集成方法和自动化工作流设计，可能与读者的Windows自动化脚本和数据清洗工作有一定借鉴意义。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">插件丰富且文档完善，但Issue关闭率低(17.6%)，社区维护有待加强。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>项目未明确声明许可证类型，存在法律使用风险 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>插件独立管理，缺乏统一的版本控制和依赖管理机制 <span class="basis">通用判断</span></li><li>兼容性扫描范围有限，可能无法覆盖所有使用场景 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> CLI-backed repo compatibility scans plus agents that audit startup, validation, and docs against reality.（逐字核对通过）</span></li><li>某些插件(如Thermos)可能过于激进，不适合生产环境 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Thermo-nuclear branch review: deep security/correctness audits, harsh code-quality rubrics, parallel subagents, thermos orchestration, and optional merge-ready PR flows.（逐字核对通过）</span></li><li>部分插件仍处于Beta测试阶段，稳定性有待验证 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Salesforce (Headless 360, Beta)（逐字核对通过）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/boykopovar/AnyPS5" target="_blank" rel="noopener">boykopovar/AnyPS5</a>
+      <div class="cnname">游戏移植工具</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 3 次</span><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.3</span><span class="bdg blue">飙升榜 No.3</span><span class="bdg grey">C++</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">43,227</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+14,224</span></div>
+    <div><span class="k">周增速</span><span class="v r">32.9%</span></div>
+    <div><span class="k">fork / star</span><span class="v">9.1%</span></div>
+    <div><span class="k">许可证</span><span class="v">GPL-2.0</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">81.1%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">938</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">自动将PS5游戏可执行文件移植到Linux和Windows的工具。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">解决了跨平台游戏移植的技术难题，使PS5游戏能在非索尼平台上运行，扩大游戏兼容性。</span></div>
+  </div>
+  <div class="you lo">
+    <b>对你的意义 · 无关</b>
+    作为工业软件实施工程师，您的工作涉及三维可视化、电力设计和IoT数据对接，与游戏移植技术领域无直接关联。该项目专注于游戏可执行文件格式转换，与您的专业领域不匹配。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★<span class="off">★★</span></span>
+    <span class="txt">加分：技术成熟度高，文档完善。扣分：与读者工作领域无关，实用性低。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>不支持或意外状态会抛出std::runtime_error错误并终止进程 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Unsupported or unexpected states strictly throw `std::runtime_error`（逐字核对通过）</span></li><li>不包含、分发或需要受版权保护的软件、固件、加密密钥或专有库 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> does not include, distribute, or require copyrighted software（逐字核对通过）</span></li><li>各游戏进度在blocker地图上追踪，表明支持不完整 <span class="basis part" title="不是逐字引用，但关键表述在 README 中都能找到">原文有支撑</span><span class="q"><b>相关原文</b> Per-game progress...is tracked on the blocker map（跨段概括，非逐字引用）</span></li><li>测试报告需在Game bring-up讨论区提交，表明测试流程不完善 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Test reports go in the Game bring-up discussions（逐字核对通过）</span></li><li>项目仅用于互操作性、研究、保存和兼容性目的，非商业用途 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Intended for interoperability, research, preservation, and compatibility purposes（逐字核对通过）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/thedotmack/claude-mem" target="_blank" rel="noopener">thedotmack/claude-mem</a>
+      <div class="cnname">AI记忆助手</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 2 次</span><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.5</span><span class="bdg blue">飙升榜 No.10</span><span class="bdg grey">TypeScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">99,857</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+3,803</span></div>
+    <div><span class="k">周增速</span><span class="v r">3.8%</span></div>
+    <div><span class="k">fork / star</span><span class="v">8.8%</span></div>
+    <div><span class="k">许可证</span><span class="v">Apache-2.0</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">98.5%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">96</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">Claude-Mem是一个持久化上下文系统，通过AI压缩会话内容并注入未来会话，实现AI助手跨会话记忆能力。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">解决了AI助手会话间记忆断层问题，使AI能够持续理解项目上下文，减少重复解释，提高长期协作效率。</span></div>
+  </div>
+  <div class="you lo">
+    <b>对你的意义 · 无关</b>
+    Claude-Mem专注于AI助手的跨会话记忆功能，与读者的三维可视化、电力设计、GIS、IoT传感器数据对接等工作领域无直接关联。除非读者需要在AI辅助编程或设计工具中实现长期上下文记忆，否则此项目当前工作场景应用价值有限。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★★<span class="off"></span></span>
+    <span class="txt">加分项：项目成熟度高，社区活跃；扣分项：功能单一，仅适用于AI助手上下文记忆。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>需要Node.js &gt;= 20.0.0运行环境 <span class="basis warn" title="声称来自 README，但未能在原文中逐字定位，请自行判断">依据待核</span><span class="q"><b>声称依据</b> node-&gt;=20.0.0（未能在 README 原文中定位）</span></li><li>安装此插件不会自动安装Cursor编辑器 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Installing this plugin does not install Cursor.（逐字核对通过）</span></li><li>Grok Bot没有主机钩子，需监视聊天日志文件 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Grok Bot has no host hooks, so we watch the chat log files.（逐字核对通过）</span></li><li>本地观察者功能需要手动启用 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Local observer is opt-in: `--provider host`.（逐字核对通过）</span></li><li>可能对非Claude系列AI助手的支持有限 <span class="basis">通用判断</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/danyuchn/asd-ste100-skill" target="_blank" rel="noopener">danyuchn/asd-ste100-skill</a>
+      <div class="cnname">技术英语简化工具</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 2 次</span><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.9</span><span class="bdg blue">飙升榜 No.5</span><span class="bdg grey">Python</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">4,597</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+936</span></div>
+    <div><span class="k">周增速</span><span class="v r">20.4%</span></div>
+    <div><span class="k">fork / star</span><span class="v">5.8%</span></div>
+    <div><span class="k">许可证</span><span class="v">MIT</span></div>
+    <div><span class="k">最近提交</span><span class="v">8 天前</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">66.7%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">6</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">Claude Code技能，将复杂英文重写为简化技术英语，确保AI代理间通信无歧义。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">解决AI代理间通信歧义问题，提高多代理系统协作效率，减少误解导致的错误。</span></div>
+  </div>
+  <div class="you lo">
+    <b>对你的意义 · 无关</b>
+    该项目专注于AI代理间的通信简化，与您的工作领域（三维可视化、电力设计、GIS、IoT数据对接）无直接关联。除非您的工作涉及开发AI代理系统或多智能体协作，否则此工具对当前工作无直接应用价值。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分项：高star数，快速增长；扣分项：Issue关闭率一般，未完整实现所有ASD-STE100规则。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>linter功能有限，不检查名词簇长度，不认识列表外的动词短语 <span class="basis part" title="不是逐字引用，但关键表述在 README 中都能找到">原文有支撑</span><span class="q"><b>相关原文</b> The deterministic linter checks semicolons, a short list of soft phrasal verbs... It does not check noun-cluster length... and it does not know phrasal verbs outside its list（跨段概括，非逐字引用）</span></li><li>项目自身的文档并不完全符合其自己定义的STE规则 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> The repo&#x27;s own prose does not lint clean: the rule tables quote the patterns they forbid, and some sentences run long.（逐字核对通过）</span></li><li>linter只检查结构模式，不验证重写是否保持了原始含义 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> The linter checks structural patterns only. It does not compare an original text with a rewrite, verify that requirement strength stayed the same, or prove that the rewrite preserved meaning.（逐字核对通过）</span></li><li>项目没有实现ASD的全部官方词典 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> It does not reproduce ASD&#x27;s official ~900-word approved dictiona（逐字核对通过）</span></li><li>零违规结果只意味着结构检查未发现问题，不代表完全符合STE标准 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> A zero-violation result means that the configured structural checks found no problems.（逐字核对通过）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/earthtojake/text-to-cad" target="_blank" rel="noopener">earthtojake/text-to-cad</a>
+      <div class="cnname">文本转CAD</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 2 次</span><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.6</span><span class="bdg blue">飙升榜 No.6</span><span class="bdg grey">Python</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">19,410</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+2,508</span></div>
+    <div><span class="k">周增速</span><span class="v r">12.9%</span></div>
+    <div><span class="k">fork / star</span><span class="v">9.9%</span></div>
+    <div><span class="k">许可证</span><span class="v">MIT</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">98.5%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">31</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">为AI代理提供CAD功能的插件，可生成3D模型和工程图纸。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">解决了通过自然语言直接生成CAD模型的需求，简化设计流程，提高从概念到实物的转化效率。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 中相关</b>
+    该工具可用于快速生成地质或矿山相关的三维模型原型，但主要面向AI代理集成，而非直接专业CAD设计。需要了解Python和相关AI代理的使用，才能有效整合到现有工作流中。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分项：高星标、高Issue关闭率、最近有提交；扣分项：创建时间较新，长期稳定性待验证。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>需要通过uv安装，增加了部署复杂度 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> CAD runs through [uv](https://docs.astral.sh/uv/): check that it is installed（逐字核对通过）</span></li><li>默认收集使用统计和崩溃报告 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> By default, text-to-cad sends usage stats and crash reports（逐字核对通过）</span></li><li>需要网络连接首次启动 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Its first start downloads CAD&#x27;s runtime, so it needs a network connection（逐字核对通过）</span></li><li>仅支持特定AI代理 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> It is supported by all popular agents that support plugins or the skills framework（逐字核对通过）</span></li><li>项目创建时间较新，长期稳定性待验证 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">mattpocock/skills</a>
+      <div class="cnname">AI编程助手技能包</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 2 次</span><span class="bdg red">星榜 No.2</span><span class="bdg grey">Shell</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">286,842</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+10,330</span></div>
+    <div><span class="k">周增速</span><span class="v r">3.6%</span></div>
+    <div><span class="k">fork / star</span><span class="v">8.4%</span></div>
+    <div><span class="k">许可证</span><span class="v">MIT</span></div>
+    <div><span class="k">最近提交</span><span class="v">2 天前</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">83.6%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">166</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">这是一套为真实工程师设计的AI编程助手技能，支持多种AI编程工具，旨在提高开发效率。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">解决了AI编程助手与开发者之间的沟通鸿沟，通过结构化提问和共享语言，减少误解，提高代码质量，减少返工。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 中相关</b>
+    虽然项目主要面向AI编程助手的使用，但作为实施工程师，您可能需要编写脚本或与开发团队协作。这些技能可以帮助您更好地与AI工具协作，提高工作效率，特别是在数据处理和自动化脚本编写方面。不过，需要学习新的工具集成方式。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分项：项目成熟度高，社区活跃，支持多种AI工具。扣分项：需要额外学习和配置，可能增加使用复杂度。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>安装后需要手动更新技能，除非使用特定AI工具 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Updates itself by default.（逐字核对通过）</span></li><li>必须为每个代理选择一个技能，安装两者会导致技能重复 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Pick one per agent, because installing both gives you every skill twice.（逐字核对通过）</span></li><li>需要在每个仓库中运行设置脚本，增加了初始配置复杂度 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Run `/setup-matt-pocock-skills` In your agent, run it once per repo.（逐字核对通过）</span></li><li>GitHub Copilot需要额外配置settings.json文件 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> add to `~/.copilot/settings.json`（逐字核对通过）</span></li><li>某些AI工具需要手动更新技能 <span class="basis part" title="不是逐字引用，但关键表述在 README 中都能找到">原文有支撑</span><span class="q"><b>相关原文</b> Any other agent, or editable files (manual updates)（跨段概括，非逐字引用）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/tester-army/e2e" target="_blank" rel="noopener">tester-army/e2e</a>
+      <div class="cnname">端到端测试框架</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 2 次</span><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.3</span><span class="bdg blue">飙升榜 No.2</span><span class="bdg grey">TypeScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">9,241</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+6,440</span></div>
+    <div><span class="k">周增速</span><span class="v r">69.7%</span></div>
+    <div><span class="k">fork / star</span><span class="v">4.8%</span></div>
+    <div><span class="k">许可证</span><span class="v">Apache-2.0</span></div>
+    <div><span class="k">最近提交</span><span class="v">昨天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">78.4%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">109</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">e2e 是一个用于 Web 和移动应用的端到端测试框架，支持自然语言描述测试目标。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">通过自然语言描述测试目标，减少编写测试代码的工作量，实现自动化测试的快速部署和执行。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    对于工业软件实施工程师而言，此项目主要用于软件测试环节，而非直接应用于三维可视化、点云处理或电力设计等核心业务。若需对工业软件进行自动化测试，可考虑使用此框架，但需要额外学习测试脚本编写和模型配置。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分项：star增长迅速，最近有提交；扣分项：仍在开发中，API和配置可能在小版本间变化。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>API 和配置可能在小版本间变化 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> e2e is in active development on the way to 1.0. APIs and config can still change between minor releases.（逐字核对通过）</span></li><li>需要配置模型提供商，可能需要额外订阅费用 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Bring your own subscription, API key, or local model.（逐字核对通过）</span></li><li>CLI 会发送匿名使用数据 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> The CLI sends anonymous usage data, such as which commands and engines run and where runs fail, but no test content, app content, or credentials.（逐字核对通过）</span></li><li>未关闭的 Issue 数量较多 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>需要安装多个包才能使用完整功能 <span class="basis">通用判断</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/ranxianglei/billion-context" target="_blank" rel="noopener">ranxianglei/billion-context</a>
+      <div class="cnname">上下文压缩器</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 2 次</span><span class="bdg blue">飙升榜 No.3</span><span class="bdg grey">TypeScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">1,003</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+337</span></div>
+    <div><span class="k">周增速</span><span class="v r">33.6%</span></div>
+    <div><span class="k">fork / star</span><span class="v">8.7%</span></div>
+    <div><span class="k">许可证</span><span class="v">未声明</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">93.1%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">205</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">一个用于大语言模型上下文压缩的插件，支持小窗口、高压缩率和长会话。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">解决大模型上下文窗口限制，减少 token 消耗，支持超长会话，提高处理大规模上下文的效率。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    对于三维平台实施和工业 IoT 数据对接工作，此项目价值有限。它专注于大语言模型的上下文压缩，而非工业数据处理或可视化。如果未来需要将大语言模型集成到工业系统中，可能会用到此类技术，但目前与读者日常工作关联不大。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★<span class="off">★★</span></span>
+    <span class="txt">加分项：star 增长快，提交频繁。扣分项：许可证未声明，项目创建时间短。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>压缩效果依赖于缓存命中率，可能需要额外监控 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Sustained lower? Check attribution with `/acp` or `/acp-cache`（逐字核对通过）</span></li><li>许可证未声明，可能存在法律风险 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>项目创建时间短，长期稳定性未验证 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>未关闭的 Issue 较多，可能存在未解决的问题 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>项目可能存在 bug，且需要用户报告 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> a bili bug (please report)（逐字核对通过）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/mvschwarz/openrig" target="_blank" rel="noopener">mvschwarz/openrig</a>
+      <div class="cnname">AI智能体编排</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 2 次</span><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.7</span><span class="bdg blue">飙升榜 No.4</span><span class="bdg grey">TypeScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">7,066</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+2,028</span></div>
+    <div><span class="k">周增速</span><span class="v r">28.7%</span></div>
+    <div><span class="k">fork / star</span><span class="v">7.5%</span></div>
+    <div><span class="k">许可证</span><span class="v">Apache-2.0</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">59.6%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">165</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">构建和管理AI编码智能体团队的开源工具</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">将分散的AI编码助手整合为持久、有组织的团队，实现协作与任务分配</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    作为工业软件实施工程师，您的工作主要聚焦于三维可视化、电力设计、GIS和IoT数据处理，而非AI编码助手管理。OpenRig更适合开发人员协调AI编码工具，与您的技术栈和工作场景关联度较低。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分项：高星数、活跃社区、详细文档；扣分项：Issue关闭率中等、未关闭Issue较多</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>原生Windows不支持，只能在WSL2上运行 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> On Windows, use WSL2, the Windows route OpenRig supports; native Windows isn&#x27;t supported（逐字核对通过）</span></li><li>需要Node.js 22或24，某些系统可能需要额外安装 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Requires Node.js 22 or 24 and tmux, on macOS or Linux（逐字核对通过）</span></li><li>Issue关闭率不高，只有59.6% <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>未关闭的Issue数量较多，有165条 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>Apple Silicon上存在兼容性问题 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> On a Mac with Apple silicon, use Node.js 22（逐字核对通过）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/anthropics/claude-plugins-official" target="_blank" rel="noopener">anthropics/claude-plugins-official</a>
+      <div class="cnname">Claude插件市场</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 2 次</span><span class="bdg blue">飙升榜 No.9</span><span class="bdg grey">Python</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">44,558</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+2,245</span></div>
+    <div><span class="k">周增速</span><span class="v r">5.0%</span></div>
+    <div><span class="k">fork / star</span><span class="v">10.5%</span></div>
+    <div><span class="k">许可证</span><span class="v">Apache-2.0</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">18.2%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">1211</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">Anthropic官方管理的Claude Code高质量插件目录</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">为Claude Code用户提供可扩展的插件生态，简化功能集成流程</span></div>
+  </div>
+  <div class="you lo">
+    <b>对你的意义 · 无关</b>
+    此项目是Claude Code的官方插件目录，专注于扩展AI编程助手的编程功能，与三维可视化、GIS、IoT数据处理、电力设计等领域无直接关联。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★<span class="off">★★</span></span>
+    <span class="txt">项目成熟度高但与读者工作领域无关</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>Anthropic不控制插件包含的MCP服务器和其他软件，无法验证其功能或变更 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Anthropic does not control what MCP servers, files, or other software are included in plugins and cannot verify that they will work as intended or that they won&#x27;t change.（逐字核对通过）</span></li><li>插件名称一旦发布不可更改，重命名会导致用户安装失败 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Once a plugin has been published, its name must not change — users have it installed under that slug, and renaming it breaks their install with a plugin-not-found error.（逐字核对通过）</span></li><li>Issue关闭率仅18.2%，问题处理效率较低 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>第三方插件审核标准不明确，仅提及需满足质量和安全标准 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> External plugins must meet quality and security standards for approval（逐字核对通过）</span></li><li>文档不完整，缺乏详细的开发指南和故障排除信息 <span class="basis">通用判断</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/EpicGames/raddebugger" target="_blank" rel="noopener">EpicGames/raddebugger</a>
+      <div class="cnname">RAD调试器</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 2 次</span><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.10</span><span class="bdg blue">飙升榜 No.8</span><span class="bdg grey">C</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">8,419</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+794</span></div>
+    <div><span class="k">周增速</span><span class="v r">9.4%</span></div>
+    <div><span class="k">fork / star</span><span class="v">4.8%</span></div>
+    <div><span class="k">许可证</span><span class="v">MIT</span></div>
+    <div><span class="k">最近提交</span><span class="v">4 天前</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">67.6%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">321</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">Epic Games开发的原生、用户模式、多进程、图形化调试器，支持Windows x64平台。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">提供高性能调试体验，通过RDI格式优化调试信息处理，加速大型项目的编译-调试循环。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    作为工业软件实施工程师，您可能需要调试Windows桌面应用程序或处理与工业IoT相关的C/C++程序。此调试器可作为辅助工具，但目前仅支持Windows平台且处于Alpha阶段，稳定性有限，更适合专业开发人员使用。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★<span class="off">★★</span></span>
+    <span class="txt">加分：Epic开发，性能优化明显；扣分：仅支持Windows，处于Alpha阶段。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>目前仅支持本地Windows x64调试 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> It currently only supports local-machine Windows x64 debugging with PDBs（逐字核对通过）</span></li><li>调试器目前处于Alpha阶段，不够稳定 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> The debugger is currently in *ALPHA*（逐字核对通过）</span></li><li>不支持Linux平台调试 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> with plans to expand and port in the future（逐字核对通过）</span></li><li>Issue关闭率不高，存在较多未解决问题 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>项目创建时间短，长期稳定性有待验证 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/morluto/rea" target="_blank" rel="noopener">morluto/rea</a>
+      <div class="cnname">逆向工程助手</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 1 次</span><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.1</span><span class="bdg blue">飙升榜 No.1</span><span class="bdg grey">TypeScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">322,440</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+229,268</span></div>
+    <div><span class="k">周增速</span><span class="v r">71.1%</span></div>
+    <div><span class="k">fork / star</span><span class="v">25.3%</span></div>
+    <div><span class="k">许可证</span><span class="v">MIT</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">69.3%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">1198</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">一个通过代理分析应用程序行为和原生二进制文件的逆向工程工具。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">解决了逆向工程中复杂性和技术门槛高的问题，使开发者无需源代码即可理解应用程序工作原理。</span></div>
+  </div>
+  <div class="you lo">
+    <b>对你的意义 · 无关</b>
+    这个项目专注于软件逆向工程，与您目前从事的工业软件实施、数据分析和三维可视化工作领域无直接关联。除非您需要分析特定软件的内部工作机制，否则此工具对您的日常工作帮助有限。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★★<span class="off"></span></span>
+    <span class="txt">项目活跃度高，社区支持强大，但Issue数量较多表明存在一些未解决的问题。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>Linux系统需要特定工具才能正常运行 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> On Linux, Ghidra, JADX, firmware tool launches and static JavaScript/Electron analysis require a procps-compatible（逐字核对通过）</span></li><li>安装过程会修改现有配置 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Setup adds REA&#x27;s MCP server and matching workflow instructions, with backups of existing configuration.（逐字核对通过）</span></li><li>分析结果可能存在局限性 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Analysis runs locally, and results include the evidence and limitations behind each conclusion.（逐字核对通过）</span></li><li>项目存在大量未关闭的Issue <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>高级分析功能需要额外专业工具支持 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Native analysis can use an existing Hopper, Ghidra, or IDA installation; setup can optionally install Hopper with approval.（逐字核对通过）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/storytold/artcraft" target="_blank" rel="noopener">storytold/artcraft</a>
+      <div class="cnname">艺术创作引擎</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 1 次</span><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.2</span><span class="bdg blue">飙升榜 No.2</span><span class="bdg grey">Rust</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">32,746</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+16,379</span></div>
+    <div><span class="k">周增速</span><span class="v r">50.0%</span></div>
+    <div><span class="k">fork / star</span><span class="v">15.8%</span></div>
+    <div><span class="k">许可证</span><span class="v">Apache-2.0</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">25.3%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">451</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">ArtCraft 是一款面向艺术家、设计师和电影制作者的交互式 AI 图像和视频创作 IDE。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">将文本提示转化为视觉创作，提供精确控制的可重复艺术创作流程，提升创意实现效率。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    ArtCraft 主要用于艺术创作，与您的工业三维可视化、电力设计和测绘工作领域关联性较低。虽然它有一些3D功能，但更侧重于艺术表现而非工业应用，且您的技术栈（SQL、数据清洗、IoT对接）与该项目的技术方向（Rust、AI图像生成）不匹配。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分项：高星数、高增速、活跃开发；扣分项：Issue关闭率低，未解决问题多。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>Issue关闭率低，项目维护效率可能不高 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>未关闭Issue数量较多，可能存在较多未解决的问题 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>项目创建时间较短，长期稳定性有待观察 <span class="basis">通用判断</span></li><li>作为艺术创作工具，可能对硬件要求较高 <span class="basis">通用判断</span></li><li>主要面向艺术创作领域，工业应用场景有限 <span class="basis">通用判断</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/cloudflare/security-audit-skill" target="_blank" rel="noopener">cloudflare/security-audit-skill</a>
+      <div class="cnname">安全审计技能</div>
+    </div>
+    <span class="badges"><span class="bdg amber">本月上榜 1 次</span><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.1</span><span class="bdg blue">飙升榜 No.1</span><span class="bdg grey">JavaScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">46,842</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+15,072</span></div>
+    <div><span class="k">周增速</span><span class="v r">32.2%</span></div>
+    <div><span class="k">fork / star</span><span class="v">6.2%</span></div>
+    <div><span class="k">许可证</span><span class="v">MIT</span></div>
+    <div><span class="k">最近提交</span><span class="v">1 个月前</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">8.3%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">96</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">这是一个结构化的安全审计技能，通过六个阶段独立验证代码漏洞，生成机器可读的安全报告。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">自动化安全审计流程，减少人工审计工作量，提高漏洞发现的全面性和一致性，提供标准化的安全评估报告。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    该工具主要针对软件安全审计，与读者目前从事的三维可视化、点云处理、电力设计、IoT数据对接等工作领域不直接相关。除非读者需要对其开发的应用程序进行安全审计，否则此工具的实用性有限。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分项：高star数，周增长快，结构化六阶段审计流程。扣分项：Issue关闭率低(8.3%)，未关闭Issue多达96条。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>需要支持工具使用和并行子代理的编码代理环境 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> A coding agent with a model that supports tool use and parallel sub-agents（逐字核对通过）</span></li><li>需要Node.js环境运行零依赖的发现和覆盖率分类账验证器 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Node.js for the zero-dependency findings and coverage-ledger validators（逐字核对通过）</span></li><li>需要操作系统强制执行的沙盒环境，禁用外部网络 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> An OS-enforced sandbox for target-controlled builds, tests, processes, browsers, emulators, fuzzers, and fixtures（逐字核对通过）</span></li><li>Issue关闭率低，仅8.3%，未关闭Issue多达96条 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>项目创建日期在未来(2026-06-18)，可能存在数据错误 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li></ol>
+  </div>
+</div>
+  </section>
+  <footer>
+    <div class="l"><b>生成方式</b><span>fnOS NAS 定时任务 · 每月最后一周替代周报发出</span></div>
+    <div class="l"><b>数据来源</b><span>GitHub Trending 周榜 + GitHub API</span></div>
+    <p>月报只收录当月出现的项目，去重后按表现重排。AI 推荐指数为模型综合评估，不是真实用户评分；硬指标均为 GitHub API 实测值。</p>
+  </footer>
+</div></body></html>
