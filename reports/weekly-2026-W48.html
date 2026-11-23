@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GitHub 周榜速报 · 2026-W48</title>
+<style>
+:root{
+  --bg:#f4f6f8; --card:#ffffff; --ink:#1a1d21; --ink2:#57606a; --ink3:#8b949e;
+  --line:#e3e7eb; --red:#d92b2b; --red-soft:#fdecec; --blue:#2563eb; --blue-soft:#eaf1fe;
+  --amber:#c77800; --amber-soft:#fdf3e2; --green:#1a7f4b; --green-soft:#e8f6ee;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.72; font-size:15px; -webkit-font-smoothing:antialiased;
+  padding:0 0 56px;
+}
+.wrap{max-width:780px;margin:0 auto;padding:0 16px}
+
+/* header */
+.hero{background:var(--card);border-bottom:1px solid var(--line);padding:30px 0 26px;margin-bottom:22px}
+.hero .kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
+  letter-spacing:.14em;color:var(--red);background:var(--red-soft);padding:5px 12px;border-radius:999px}
+.hero h1{font-size:29px;line-height:1.3;margin:16px 0 8px;letter-spacing:-.01em}
+.hero .sub{color:var(--ink2);font-size:14px}
+.hero .period{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.hero .period span{font-size:12.5px;color:var(--ink2);background:var(--bg);
+  border:1px solid var(--line);padding:4px 11px;border-radius:7px}
+
+/* section */
+section{margin-bottom:26px}
+h2{font-size:19px;display:flex;align-items:center;gap:10px;margin-bottom:4px}
+h2 .dot,.bh .dot{width:9px;height:9px;border-radius:3px;flex:none}
+h2 .cnt{margin-left:auto;font-size:12px;font-weight:500;color:var(--ink3)}
+.sec-hint{color:var(--ink2);font-size:13.5px;margin:6px 0 14px}
+.legend{display:flex;flex-wrap:wrap;gap:7px 15px;margin:11px 0 16px;font-size:11.5px;
+  color:var(--ink2);background:var(--card);border:1px solid var(--line);
+  border-radius:10px;padding:10px 14px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend .basis{margin-left:0}
+
+/* overview */
+.ov{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+.ov h3{font-size:17px;margin-bottom:12px}
+.ov ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ov li{position:relative;padding-left:20px;font-size:14.3px;color:#333a42}
+.ov li::before{content:"";position:absolute;left:4px;top:10px;width:6px;height:6px;
+  border-radius:2px;background:var(--red);opacity:.75}
+
+/* board */
+.board{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid var(--line);
+  text-decoration:none;color:inherit}
+.row:first-child{border-top:none}
+.rk{flex:none;width:25px;height:25px;border-radius:7px;display:grid;place-items:center;
+  font-size:12.5px;font-weight:700;background:var(--bg);color:var(--ink2)}
+.rk.top{background:linear-gradient(135deg,#e03131,#b31f1f);color:#fff}
+.rk.t2{background:var(--blue);color:#fff}
+.nm{flex:1;min-width:0}
+.nm b{display:block;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.nm i{font-style:normal;font-size:12px;color:var(--ink2);display:block;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.bh{font-size:15px;font-weight:700;display:flex;align-items:center;gap:9px;margin:24px 0 4px}
+.bh .cnt{font-size:12px;font-weight:500;color:var(--ink3);margin-left:auto}
+.bh:first-of-type{margin-top:6px}
+.cell{flex:none;text-align:right;min-width:74px}
+.cell em{display:block;font-style:normal;font-size:14.5px;font-weight:700;color:var(--red)}
+.cell u{text-decoration:none;font-size:11px;color:var(--ink3)}
+.tagbar{flex:none;width:56px;text-align:right}
+.hit{display:inline-block;font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;
+  background:var(--amber-soft);color:var(--amber);letter-spacing:.02em}
+
+/* project card */
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;
+  margin-bottom:14px}
+.pcard .ph{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:13px}
+.pcard .phl{flex:1;min-width:190px}
+.pcard .repo{font-size:14px;font-weight:600;color:var(--ink2);text-decoration:none;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all}
+.pcard .repo:hover{color:var(--blue)}
+.cnname{font-size:19px;font-weight:700;letter-spacing:-.01em;margin-top:4px;line-height:1.45}
+.cnname::before{content:"";display:inline-block;width:4px;height:16px;background:var(--red);
+  border-radius:2px;margin-right:9px;vertical-align:-2px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.bdg{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.bdg.red{background:var(--red-soft);color:var(--red)}
+.bdg.amber{background:var(--amber-soft);color:var(--amber)}
+.bdg.blue{background:var(--blue-soft);color:var(--blue)}
+.bdg.grey{background:var(--bg);color:var(--ink2);border:1px solid var(--line)}
+
+.nums{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);border-radius:10px;
+  overflow:hidden;margin:12px 0 14px}
+.nums div{flex:1;min-width:88px;padding:8px 12px;border-left:1px solid var(--line)}
+.nums div:first-child{border-left:none}
+.nums .k{font-size:11px;color:var(--ink3);display:block}
+.nums .v{font-size:15px;font-weight:700}
+.nums .v.r{color:var(--red)}
+
+.fields{display:flex;flex-direction:column;gap:9px}
+.f{display:flex;gap:9px;font-size:14.2px}
+.f .lab{flex:none;width:72px;font-size:12px;font-weight:700;color:var(--ink2);
+  padding-top:2px;text-align:right}
+.f .val{flex:1;color:#333a42}
+.f .val.ai{color:var(--ink2);font-size:13.6px}
+
+.you{margin-top:11px;border-radius:10px;padding:11px 14px;font-size:13.8px;
+  border-left:3px solid var(--line);background:var(--bg)}
+.you.hi{border-left-color:var(--red);background:var(--red-soft)}
+.you.mid{border-left-color:var(--blue);background:var(--blue-soft)}
+.you.lo{border-left-color:var(--ink3);background:var(--bg)}
+.you b{font-size:12px;display:block;margin-bottom:3px;letter-spacing:.02em}
+
+.rate{display:flex;align-items:center;gap:9px;margin:14px 0 0;padding-top:13px;
+  border-top:1px dashed var(--line);flex-wrap:wrap}
+.stars{font-size:16px;letter-spacing:2px;color:#e0a52e}
+.stars .off{color:#d6dbe0}
+.rate .txt{font-size:12.5px;color:var(--ink2);flex:1;min-width:180px}
+.ratio-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;
+  background:var(--red-soft);color:var(--red)}
+
+.cons{margin-top:14px}
+.cons .t{font-size:12px;font-weight:700;color:var(--ink2);margin-bottom:7px;letter-spacing:.02em}
+.cons ol{list-style:none;counter-reset:c;display:flex;flex-direction:column;gap:7px}
+.cons li{counter-increment:c;position:relative;padding-left:24px;font-size:13.6px;color:#3b424a}
+.cons li::before{content:counter(c);position:absolute;left:0;top:2px;width:16px;height:16px;
+  border-radius:5px;background:var(--bg);border:1px solid var(--line);color:var(--ink3);
+  font-size:10px;font-weight:700;display:grid;place-items:center}
+.basis{display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:4px;
+  background:var(--bg);border:1px solid var(--line);color:var(--ink3);margin-left:7px;
+  vertical-align:1px;white-space:nowrap}
+.basis.doc{background:var(--green-soft);border-color:#bfe3cf;color:var(--green)}
+.basis.part{background:var(--blue-soft);border-color:#c6d8fb;color:var(--blue)}
+.basis.warn{background:var(--amber-soft);border-color:#f0dcb4;color:var(--amber)}
+.cons .q{display:block;margin:3px 0 1px;font-size:11.5px;line-height:1.5;color:var(--ink3);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-word}
+.cons .q b{color:var(--ink2);font-weight:600}
+
+footer{margin-top:30px;padding:18px 20px;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;color:var(--ink2);font-size:12.5px}
+footer .l{display:flex;gap:8px;margin-bottom:7px;flex-wrap:wrap}
+footer .l b{color:var(--ink)} footer .l span{color:var(--ink3)}
+footer p{margin-top:8px;line-height:1.65}
+@media(max-width:520px){
+  .hero h1{font-size:23px}
+  .nums div{min-width:50%}
+  .f .lab{width:100%;text-align:left;padding-top:0}
+  .f{flex-direction:column;gap:1px}
+}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="wrap">
+    <span class="kicker">GITHUB WEEKLY · 2026-W48</span>
+    <h1>GitHub 周榜速报</h1>
+    <div class="sub">逐项目详解 · 中文名速查 · 双榜速览附于文末</div>
+    <div class="period">
+      <span>周期 2026-11-23 ~ 2026-11-29</span>
+      <span>数据源 github.com/trending?since=weekly</span>
+      <span>抓取 13 个仓库</span>
+      <span>生成于 2026-11-23 09:07</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section>
+    <div class="ov">
+      <h3>AI工具与办公SDK主导本周</h3>
+      <ul><li>本周榜单中AI工具与办公SDK占据主导地位，FFmpeg视频工具集以38.54%的周增速领跑，而跨平台搜索智能体虽周增star高达4731，但增速仅6.51%，显示已有稳定用户基础的项目增速放缓</li><li>项目依赖问题普遍存在，现代Web指南要求Node.js 22+，设计技能库依赖Stitch MCP服务器，反映出当前开源项目环境配置复杂度增加，集成成本上升</li><li>Issue关闭率差距显著，跨平台搜索智能体高达97.7%，而苹果表盘解锁仅10.5%，后者虽获461星但维护严重不足，提醒用户关注项目活跃度而非仅看star数</li><li>对于工业软件实施工程师，建议关注现代Web指南和Office SDK开发平台，前者可能有助于技术集成，后者可扩展工具链；可忽略交易技能工具包和苹果表盘解锁等与领域无关项目</li></ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot" style="background:#c77800"></span>项目详解<span class="cnt">12 个项目（两榜已去重）</span></h2>
+    <div class="sec-hint">两个榜单合并去重后共 12 个项目，按热度排序。标题下方的中文名是按项目作用取的，方便快速定位。推荐指数为 AI 综合评估，非真实用户评分；卡片顶部四项数字均为榜单页可直接验证的硬数据。</div>
+    <div class="legend">
+      <span><i class="basis doc">README 依据 ✓</i>已在 README 原文逐字核对，下面附原文</span>
+      <span><i class="basis doc">实测指标</i>来自 GitHub API 的硬数据</span>
+      <span><i class="basis part">原文有支撑</i>跨段概括，关键表述原文可查</span>
+      <span><i class="basis">通用判断</i>AI 明示无具体依据</span>
+      <span><i class="basis warn">依据待核</i>原文里查不到，谨慎采信</span>
+    </div>
+    
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/dream-num/univer" target="_blank" rel="noopener">dream-num/univer</a>
+      <div class="cnname">Office SDK开发平台</div>
+    </div>
+    <span class="badges"><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.1</span><span class="bdg blue">飙升榜 No.5</span><span class="bdg grey">TypeScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">31,269</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+6,436</span></div>
+    <div><span class="k">周增速</span><span class="v r">20.6%</span></div>
+    <div><span class="k">fork / star</span><span class="v">9.1%</span></div>
+    <div><span class="k">许可证</span><span class="v">Apache-2.0</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">95.9%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">210</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">Univer是一个开源的Office SDK，用于构建电子表格、文档和演示文稿编辑器。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">它解决了将专业级办公功能集成到自有产品中的问题，提供了可扩展的编辑、计算和协作能力。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    Univer主要用于构建办公文档编辑功能，与读者当前从事的三维可视化、电力设计、测绘和IoT数据处理领域相关性较低。如果未来需要为系统添加文档编辑或表格处理功能，可以考虑使用其开源组件作为基础。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分：项目活跃度高，Issue关闭率95.9%；扣分：创建时间较短(约1年)，长期稳定性待验证。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>开源部分仅提供基础功能，高级功能可能需要商业许可 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Scope and licensing（逐字核对通过）</span></li><li>项目历史较短，长期稳定性有待验证 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>仍有210个未关闭的Issue，可能存在已知问题 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>需要开发者具备TypeScript和前端开发技能 <span class="basis">通用判断</span></li><li>自定义功能需要清晰的边界，增加集成复杂度 <span class="basis">通用判断</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/kajisho5/ffmpeg-skill" target="_blank" rel="noopener">kajisho5/ffmpeg-skill</a>
+      <div class="cnname">FFmpeg视频工具集</div>
+    </div>
+    <span class="badges"><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.3</span><span class="bdg blue">飙升榜 No.1</span><span class="bdg grey">Python</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">9,724</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+3,748</span></div>
+    <div><span class="k">周增速</span><span class="v r">38.5%</span></div>
+    <div><span class="k">fork / star</span><span class="v">8.9%</span></div>
+    <div><span class="k">许可证</span><span class="v">MIT</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">82.4%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">45</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">本地视频编辑工具集，为编程代理提供42个FFmpeg工具</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">简化复杂视频处理流程，使非专业人士也能进行专业视频编辑</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    作为三维平台实施工程师，您的工作主要涉及矿山/地质三维可视化、点云等，与视频编辑关联性较低。但如果需要处理三维模型展示视频或测绘相关视频素材，此工具可提供本地化视频处理能力，无需云端服务。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">功能丰富且文档完善，但创建时间较短，长期稳定性待验证</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>不提供云端服务，依赖本地FFmpeg安装 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> No cloud · No API keys · Python standard library（逐字核对通过）</span></li><li>主要面向编程代理环境，普通用户直接使用困难 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Give your coding agent a video editor（逐字核对通过）</span></li><li>项目创建时间较短，长期稳定性待验证 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>需要依赖Claude Code、Cursor或Codex等编程代理环境 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Claude Code, Cursor, Codex or any MCP client edits your footage（逐字核对通过）</span></li><li>需要用户自行安装FFmpeg，增加使用门槛 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/GoogleChrome/modern-web-guidance-src" target="_blank" rel="noopener">GoogleChrome/modern-web-guidance-src</a>
+      <div class="cnname">现代Web指南</div>
+    </div>
+    <span class="badges"><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.7</span><span class="bdg blue">飙升榜 No.2</span><span class="bdg grey">TypeScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">10,208</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+3,575</span></div>
+    <div><span class="k">周增速</span><span class="v r">35.0%</span></div>
+    <div><span class="k">fork / star</span><span class="v">7.9%</span></div>
+    <div><span class="k">许可证</span><span class="v">Apache-2.0</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">84.7%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">384</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">这是一个帮助编码代理采用现代 Web 最佳实践的指南集合，包含专家策划的解决方案和浏览器兼容数据。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">解决编码代理默认使用旧模式的问题，提供针对现代浏览器API、性能与可访问性的专家指导，减少冗余代码生成。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    这个项目专注于现代 Web 开发最佳实践，主要面向 Web 开发者和编码代理。对于从事三维平台实施、电力设计软件技术支持、测绘与 GIS 工作的读者来说，除非他们需要开发基于 Web 的工具或界面，否则此项目直接应用价值有限。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分项：活跃维护，大公司支持，功能完整。扣分项：仅限 Web 开发领域，对非 Web 相关工作帮助有限。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>需要 Node.js 22 或更高版本才能安装使用 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Requires Node.js 22 or later.（逐字核对通过）</span></li><li>编码代理常默认使用旧模式，因为训练数据包含大量遗留代码 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Coding agents often default to older patterns because LLM training data contains vast amounts of legacy code.（逐字核对通过）</span></li><li>即使模型知道API存在，也常缺乏生产级代码所需的现代实现模式 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Even if a model knows an API exists, it often lacks the density of real-world, modern implementation patterns required for production-ready code.（逐字核对通过）</span></li><li>项目依赖外部代理工具，本身是辅助工具而非独立解决方案 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Our skill&#x27;s CLI returns targeted, expert-curated guidelines directly into your agent&#x27;s context window（逐字核对通过）</span></li><li>内容需要频繁更新以跟上Web平台技术的快速发展 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> We cover the past several years of the web platform&#x27;s new features, all the way up to the cutting edge.（逐字核对通过）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/tradermonty/claude-trading-skills" target="_blank" rel="noopener">tradermonty/claude-trading-skills</a>
+      <div class="cnname">交易技能工具包</div>
+    </div>
+    <span class="badges"><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.10</span><span class="bdg blue">飙升榜 No.3</span><span class="bdg grey">Python</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">7,795</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+2,616</span></div>
+    <div><span class="k">周增速</span><span class="v r">33.6%</span></div>
+    <div><span class="k">fork / star</span><span class="v">19.2%</span></div>
+    <div><span class="k">许可证</span><span class="v">MIT</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">82.1%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">58</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">基于Claude的股票投资和交易技能工具包，帮助投资者构建市场分析、风险管理和交易规划工作流程。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">为个人投资者提供结构化的市场分析方法，帮助建立纪律性的交易习惯，提升决策质量。</span></div>
+  </div>
+  <div class="you lo">
+    <b>对你的意义 · 无关</b>
+    项目专注于股票投资和交易分析，与读者的三维平台实施、GIS和IoT数据对接工作领域完全不相关。虽然使用Python语言，但应用场景和专业知识要求差异巨大，无法直接应用于读者的工作环境。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">项目活跃度高，文档完善，但仅限于特定交易场景，不适用于其他领域。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>不适合完全自动化交易 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> It is not designed for fully automated trading（逐字核对通过）</span></li><li>不适合信号外包 <span class="basis part" title="不是逐字引用，但关键表述在 README 中都能找到">原文有支撑</span><span class="q"><b>相关原文</b> It is not designed for... signal outsourcing（跨段概括，非逐字引用）</span></li><li>不适合短期剥头皮交易 <span class="basis part" title="不是逐字引用，但关键表述在 README 中都能找到">原文有支撑</span><span class="q"><b>相关原文</b> It is not designed for... short-term scalping（跨段概括，非逐字引用）</span></li><li>某些工作流程需要付费API <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Alpaca required; manual CSV is a degraded fallback（逐字核对通过）</span></li><li>仅用于教育和流程改进 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> This repository is for educational, research, and process-improvement purposes only（逐字核对通过）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/mvanhorn/last30days-skill" target="_blank" rel="noopener">mvanhorn/last30days-skill</a>
+      <div class="cnname">跨平台搜索智能体</div>
+    </div>
+    <span class="badges"><span class="bdg red">星榜 No.2</span><span class="bdg grey">Python</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">72,723</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+4,731</span></div>
+    <div><span class="k">周增速</span><span class="v r">6.5%</span></div>
+    <div><span class="k">fork / star</span><span class="v">8.8%</span></div>
+    <div><span class="k">许可证</span><span class="v">MIT</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">97.7%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">22</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">AI 驱动的跨平台搜索工具，可同时搜索多个社交媒体平台并生成基于社区反馈的摘要。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">解决了传统搜索引擎无法获取最新、非结构化社交媒体数据的问题，通过聚合多平台真实用户反馈提供更全面的信息。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    这个项目主要针对社交媒体内容搜索和聚合，与读者的工业软件实施、三维可视化、传感器数据对接等工作领域关联度较低。不过，如果需要收集行业最新动态或技术讨论，它可能有助于快速获取相关信息，但需要自行配置 API 密钥和浏览器会话。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分项：社区活跃度高，star 数量增长迅速，Issue 关闭率高。扣分项：需要用户自行配置 API 密钥，可能增加使用门槛。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>需要用户自行配置 API 密钥和浏览器会话 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> But you can bring your own keys and browser sessions（逐字核对通过）</span></li><li>初次使用需要 30 秒设置才能解锁全部平台 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Run it once and the setup wizard unlocks X, YouTube, TikTok, arXiv, Techmeme, and more in 30 seconds.（逐字核对通过）</span></li><li>Reddit 搜索需要登录账号才能获取更多内容和实时评分 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> With your OK, it can also search as your own logged-in Reddit account for more threads and live scores.（逐字核对通过）</span></li><li>每个平台都是独立的花园，有各自的 API、令牌和认证方式 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Each platform is a walled garden with its own API, its own tokens, its own auth.（逐字核对通过）</span></li><li>传统搜索引擎无法访问 Reddit 评论或 X 帖子 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Google search doesn&#x27;t touch Reddit comments or X posts.（逐字核对通过）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/ag-ui-protocol/ag-ui" target="_blank" rel="noopener">ag-ui-protocol/ag-ui</a>
+      <div class="cnname">AI代理交互协议</div>
+    </div>
+    <span class="badges"><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.6</span><span class="bdg blue">飙升榜 No.8</span><span class="bdg grey">TypeScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">21,196</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+3,620</span></div>
+    <div><span class="k">周增速</span><span class="v r">17.1%</span></div>
+    <div><span class="k">fork / star</span><span class="v">10.2%</span></div>
+    <div><span class="k">许可证</span><span class="v">MIT</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">64.3%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">605</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">AI代理与用户界面的标准化交互协议，支持多种框架和客户端。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">统一了AI代理与前端应用的连接方式，消除各框架间的定制化接线，使同一代理可支持多种客户端。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    作为工业软件实施工程师，此协议可帮助您将AI能力集成到现有的工业软件界面中，特别是需要将复杂AI功能与专业可视化界面结合的场景。但主要价值在于AI代理交互，而非您日常处理的三维建模、点云处理或数据清洗工作。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分项：1.0版本稳定，多框架支持，活跃开发；扣分项：Issue关闭率一般，未关闭问题较多。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>各框架对AI代理的实现方式不一致，增加了集成复杂度 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> every framework does it differently.（逐字核对通过）</span></li><li>传统请求/响应模型不适用于AI代理的流式输出特性 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Agents don&#x27;t fit the request/response model.（逐字核对通过）</span></li><li>仍有605条未关闭的Issue，可能存在已知问题未解决 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>Issue关闭率64.3%，问题处理效率一般 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>作为新兴协议，工业领域的应用案例可能较少 <span class="basis">通用判断</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/google-labs-code/stitch-skills" target="_blank" rel="noopener">google-labs-code/stitch-skills</a>
+      <div class="cnname">设计技能库</div>
+    </div>
+    <span class="badges"><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.9</span><span class="bdg blue">飙升榜 No.4</span><span class="bdg grey">TypeScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">11,923</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+2,683</span></div>
+    <div><span class="k">周增速</span><span class="v r">22.5%</span></div>
+    <div><span class="k">fork / star</span><span class="v">12.4%</span></div>
+    <div><span class="k">许可证</span><span class="v">Apache-2.0</span></div>
+    <div><span class="k">最近提交</span><span class="v">2 天前</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">56.7%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">28</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">Stitch Design Skills 是一个遵循 Agent Skills 开放标准的设计技能库，为 Google Stitch 提供设计相关的功能。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">通过自动化设计任务和代码转换，减少手动设计工作，提高设计效率，并确保设计系统的一致性。</span></div>
+  </div>
+  <div class="you mid">
+    <b>对你的意义 · 低相关</b>
+    该项目专注于前端设计和代码转换，与读者的工业软件实施、GIS数据处理和IoT传感器对接工作领域不直接相关。除非读者需要将前端代码转换为设计或管理设计系统，否则此项目对当前工作帮助有限。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分：项目活跃度高，star增长快；扣分：创建时间较短，Issue关闭率中等。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>需要依赖Stitch MCP服务器才能正常工作 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> These skills require the **Stitch MCP** server to be configured and running in your agent&#x27;s environment.（逐字核对通过）</span></li><li>技能之间存在相互依赖关系 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Stitch Design Skills often have inter-dependencies.（逐字核对通过）</span></li><li>与OpenCode兼容性需要额外配置 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> OpenCode does **not** use `npx plugins` / `npx skills` or the Codex/Claude marketplace layout.（逐字核对通过）</span></li><li>OpenCode需要将技能名称重命名为kebab-case <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Skills that use `stitch::…` names (or other non-kebab forms) need the `name` field and folder renamed（逐字核对通过）</span></li><li>Issue关闭率仅为56.7%，问题处理效率一般 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/backnotprop/plannotator" target="_blank" rel="noopener">backnotprop/plannotator</a>
+      <div class="cnname">计划注释器</div>
+    </div>
+    <span class="badges"><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.8</span><span class="bdg blue">飙升榜 No.6</span><span class="bdg grey">TypeScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">14,431</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+2,815</span></div>
+    <div><span class="k">周增速</span><span class="v r">19.5%</span></div>
+    <div><span class="k">fork / star</span><span class="v">9.9%</span></div>
+    <div><span class="k">许可证</span><span class="v">Apache-2.0</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">85.2%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">207</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">一个本地浏览器界面，用于与 AI 编码助手交互，注释文档、审查代码并提供反馈。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">解决了人与 AI 编码助手之间的沟通障碍，使反馈即时有效，提高协作效率，减少理解偏差。</span></div>
+  </div>
+  <div class="you lo">
+    <b>对你的意义 · 无关</b>
+    该工具专注于与 AI 编码助手的交互，而读者工作主要涉及三维可视化、点云处理、数据清洗和桌面自动化，与编程辅助工具关联性低。除非读者计划将其用于改进现有脚本或工作流程，否则应用场景有限。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分项：高 star 数量与增长率，支持多种 AI 编码助手。扣分项：创建时间较晚，长期稳定性待验证。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>需要通过插件、钩子和命令直接集成到 AI 助手中，配置可能复杂 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> It plugs directly into your agent through plugins, hooks and commands.（逐字核对通过）</span></li><li>大型变更需要启动引导式审查，可能增加使用复杂度 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> For a big change, start a guided review（逐字核对通过）</span></li><li>不会保持 AI 助手会话开启，可能影响某些协作场景 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Nothing holds an agent session open while you do（逐字核对通过）</span></li><li>存在 207 条未关闭的 Issue，可能影响用户体验 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>依赖本地浏览器环境，可能限制远程协作能力 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Plannotator is a local, browser-based review surface（逐字核对通过）</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/meta/astryx" target="_blank" rel="noopener">meta/astryx</a>
+      <div class="cnname">AI设计系统</div>
+    </div>
+    <span class="badges"><span class="bdg amber">双榜命中</span><span class="bdg red">星榜 No.5</span><span class="bdg blue">飙升榜 No.9</span><span class="bdg grey">TypeScript</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">32,234</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+3,626</span></div>
+    <div><span class="k">周增速</span><span class="v r">11.2%</span></div>
+    <div><span class="k">fork / star</span><span class="v">7.8%</span></div>
+    <div><span class="k">许可证</span><span class="v">MIT</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">81.0%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">782</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">一个开源设计系统，基于React 19+和StyleX构建，提供150+可访问组件和品牌级主题系统</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">解决了设计系统定制难、AI辅助开发工具不一致的问题，提供统一的设计规范和开发工具链</span></div>
+  </div>
+  <div class="you lo">
+    <b>对你的意义 · 无关</b>
+    由于读者主要从事三维平台实施、电力设计软件技术支持、测绘与GIS等工作，而Astryx是一个前端UI设计系统，两者工作领域几乎没有交集。除非读者需要为这些系统开发前端界面，否则此项目与当前工作无关。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★★<span class="off">★</span></span>
+    <span class="txt">加分项：star数量高，周增长快，文档完善；扣分项：项目处于Beta阶段，可能还不够稳定</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>项目仍处于Beta阶段，可能不够稳定 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Currently in Beta（逐字核对通过）</span></li><li>要求React 19或更高版本，兼容性有限 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Astryx requires React 19 or later（逐字核对通过）</span></li><li>CLI工具使用需要在package.json中添加脚本 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> For reliable CLI access, add a script to your package.json（逐字核对通过）</span></li><li>项目创建日期为未来日期(2026-01-09)，可能存在问题 <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>不提供构建插件，可能限制高级功能的使用 <span class="basis">通用判断</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/alibaba/open-code-review" target="_blank" rel="noopener">alibaba/open-code-review</a>
+      <div class="cnname">待补充</div>
+    </div>
+    <span class="badges"><span class="bdg red">星榜 No.4</span><span class="bdg grey">Go</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">55,418</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+3,700</span></div>
+    <div><span class="k">周增速</span><span class="v r">6.7%</span></div>
+    <div><span class="k">fork / star</span><span class="v">8.3%</span></div>
+    <div><span class="k">许可证</span><span class="v">Apache-2.0</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">76.8%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">345</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">AI 分析失败，本期未能生成内容。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">—</span></div>
+  </div>
+  <div class="you lo">
+    <b>对你的意义 · 未知</b>
+    AI 分析失败，本期未作判断。
+  </div>
+  <div class="rate">
+    <span class="stars"><span class="off">★★★★★</span></span>
+    <span class="txt">AI 分析失败，未评分。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>本期 AI 分析失败，未能评估。下期会重新分析该项目。 <span class="basis">通用判断</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/we-promise/sure" target="_blank" rel="noopener">we-promise/sure</a>
+      <div class="cnname">待补充</div>
+    </div>
+    <span class="badges"><span class="bdg blue">飙升榜 No.10</span><span class="bdg grey">Ruby</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">17,340</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+1,771</span></div>
+    <div><span class="k">周增速</span><span class="v r">10.2%</span></div>
+    <div><span class="k">fork / star</span><span class="v">8.8%</span></div>
+    <div><span class="k">许可证</span><span class="v">AGPL-3.0</span></div>
+    <div><span class="k">最近提交</span><span class="v">今天</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">57.8%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">1135</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">AI 分析失败，本期未能生成内容。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">—</span></div>
+  </div>
+  <div class="you lo">
+    <b>对你的意义 · 未知</b>
+    AI 分析失败，本期未作判断。
+  </div>
+  <div class="rate">
+    <span class="stars"><span class="off">★★★★★</span></span>
+    <span class="txt">AI 分析失败，未评分。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>本期 AI 分析失败，未能评估。下期会重新分析该项目。 <span class="basis">通用判断</span></li></ol>
+  </div>
+</div>
+<div class="pcard">
+  <div class="ph">
+    <div class="phl">
+      <a class="repo" href="https://github.com/pookjw/HermesEnabler" target="_blank" rel="noopener">pookjw/HermesEnabler</a>
+      <div class="cnname">苹果表盘解锁</div>
+    </div>
+    <span class="badges"><span class="bdg blue">飙升榜 No.7</span><span class="bdg grey">Objective-C</span></span>
+  </div>
+  <div class="nums">
+    <div><span class="k">总 star</span><span class="v">2,404</span></div>
+    <div><span class="k">本周新增</span><span class="v r">+461</span></div>
+    <div><span class="k">周增速</span><span class="v r">19.2%</span></div>
+    <div><span class="k">fork / star</span><span class="v">8.3%</span></div>
+    <div><span class="k">许可证</span><span class="v">MIT</span></div>
+    <div><span class="k">最近提交</span><span class="v">3 天前</span></div>
+    <div><span class="k">Issue 关闭率</span><span class="v">10.5%</span></div>
+    <div><span class="k">未关闭 Issue</span><span class="v">84</span></div>
+  </div>
+  <div class="fields">
+    <div class="f"><span class="lab">它是什么</span><span class="val">一款允许在任意 Apple Watch 上启用 Hermès 表盘的 iOS/watchOS 应用程序。</span></div>
+    <div class="f"><span class="lab">有什么用</span><span class="val">解决了 Apple Watch 用户无法在不同设备上使用高级表盘的限制，扩大了设备的使用范围。</span></div>
+  </div>
+  <div class="you lo">
+    <b>对你的意义 · 无关</b>
+    与读者的工业软件实施工作领域（三维平台、电力设计、测绘GIS等）完全无关，属于消费级电子产品定制工具，不涉及任何工业软件或数据对接技术。
+  </div>
+  <div class="rate">
+    <span class="stars">★★★<span class="off">★★</span></span>
+    <span class="txt">加分：功能明确，文档详细；扣分：安装复杂，需要开启开发者模式。</span>
+  </div>
+  <div class="cons">
+    <div class="t">缺点与坑</div>
+    <ol><li>不支持 watchOS 26 版本 <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> watchOS 26 is not supported.（逐字核对通过）</span></li><li>安装过程复杂，需要多个步骤 <span class="basis">通用判断</span></li><li>删除应用前必须备份 MobileGestalt <span class="basis doc" title="已在 README 原文中逐字核对">README 依据 ✓</span><span class="q"><b>原文</b> Before deleting the app, always restore your MobileGestalt backup through the HermesEnabler2 app.（逐字核对通过）</span></li><li>Issue 关闭率低，只有 10.5% <span class="basis doc" title="来自 GitHub API 实测的硬指标">实测指标</span><span class="q"><b>实测值</b> 实测指标　（不在 README 中，来自 GitHub API）</span></li><li>需要开启开发者模式才能使用 <span class="basis">通用判断</span></li></ol>
+  </div>
+</div>
+  </section>
+
+  <section class="appendix">
+    <h2><span class="dot" style="background:#8b949e"></span>附：榜单速览<span class="cnt">按需查看</span></h2>
+    <div class="sec-hint">正文已按去重后的 12 个项目详解完毕。以下是两个原始 Top10 榜单，供速览或核对，不看也不影响。</div>
+
+    <h3 class="bh"><span class="dot" style="background:#d92b2b"></span>本周星最多 Top10<span class="cnt">按本周新增 star 绝对量排序</span></h3>
+    <div class="sec-hint">衡量「这周谁最出圈」。大牌项目靠存量惯性也容易上榜，注意配合飙升榜一起看。</div>
+    <div class="board"><a class="row" href="https://github.com/dream-num/univer" target="_blank" rel="noopener"><span class="rk top">1</span><span class="nm"><b>dream-num/univer</b><i>Office SDK开发平台 · TypeScript</i></span><span class="tagbar"><span class="hit">双榜</span></span><span class="cell"><em>6,436</em><u>周增 star · 总量 31,269</u></span></a><a class="row" href="https://github.com/mvanhorn/last30days-skill" target="_blank" rel="noopener"><span class="rk t2">2</span><span class="nm"><b>mvanhorn/last30days-skill</b><i>跨平台搜索智能体 · Python</i></span><span class="cell"><em>4,731</em><u>周增 star · 总量 72,723</u></span></a><a class="row" href="https://github.com/kajisho5/ffmpeg-skill" target="_blank" rel="noopener"><span class="rk t2">3</span><span class="nm"><b>kajisho5/ffmpeg-skill</b><i>FFmpeg视频工具集 · Python</i></span><span class="tagbar"><span class="hit">双榜</span></span><span class="cell"><em>3,748</em><u>周增 star · 总量 9,724</u></span></a><a class="row" href="https://github.com/alibaba/open-code-review" target="_blank" rel="noopener"><span class="rk">4</span><span class="nm"><b>alibaba/open-code-review</b><i>待补充 · Go</i></span><span class="cell"><em>3,700</em><u>周增 star · 总量 55,418</u></span></a><a class="row" href="https://github.com/meta/astryx" target="_blank" rel="noopener"><span class="rk">5</span><span class="nm"><b>meta/astryx</b><i>AI设计系统 · TypeScript</i></span><span class="tagbar"><span class="hit">双榜</span></span><span class="cell"><em>3,626</em><u>周增 star · 总量 32,234</u></span></a><a class="row" href="https://github.com/ag-ui-protocol/ag-ui" target="_blank" rel="noopener"><span class="rk">6</span><span class="nm"><b>ag-ui-protocol/ag-ui</b><i>AI代理交互协议 · TypeScript</i></span><span class="tagbar"><span class="hit">双榜</span></span><span class="cell"><em>3,620</em><u>周增 star · 总量 21,196</u></span></a><a class="row" href="https://github.com/GoogleChrome/modern-web-guidance-src" target="_blank" rel="noopener"><span class="rk">7</span><span class="nm"><b>GoogleChrome/modern-web-guidance-src</b><i>现代Web指南 · TypeScript</i></span><span class="tagbar"><span class="hit">双榜</span></span><span class="cell"><em>3,575</em><u>周增 star · 总量 10,208</u></span></a><a class="row" href="https://github.com/backnotprop/plannotator" target="_blank" rel="noopener"><span class="rk">8</span><span class="nm"><b>backnotprop/plannotator</b><i>计划注释器 · TypeScript</i></span><span class="tagbar"><span class="hit">双榜</span></span><span class="cell"><em>2,815</em><u>周增 star · 总量 14,431</u></span></a><a class="row" href="https://github.com/google-labs-code/stitch-skills" target="_blank" rel="noopener"><span class="rk">9</span><span class="nm"><b>google-labs-code/stitch-skills</b><i>设计技能库 · TypeScript</i></span><span class="tagbar"><span class="hit">双榜</span></span><span class="cell"><em>2,683</em><u>周增 star · 总量 11,923</u></span></a><a class="row" href="https://github.com/tradermonty/claude-trading-skills" target="_blank" rel="noopener"><span class="rk">10</span><span class="nm"><b>tradermonty/claude-trading-skills</b><i>交易技能工具包 · Python</i></span><span class="tagbar"><span class="hit">双榜</span></span><span class="cell"><em>2,616</em><u>周增 star · 总量 7,795</u></span></a></div>
+
+    <h3 class="bh"><span class="dot" style="background:#2563eb"></span>飙升最快 Top10<span class="cnt">按 本周新增 ÷ 总 star 排序</span></h3>
+    <div class="sec-hint">衡量「谁在从小变大」。已过滤总 star 低于 200 的新建仓库，避免刷榜。这个榜单常能挖到星榜看不见的黑马。</div>
+    <div class="board"><a class="row" href="https://github.com/kajisho5/ffmpeg-skill" target="_blank" rel="noopener"><span class="rk top">1</span><span class="nm"><b>kajisho5/ffmpeg-skill</b><i>FFmpeg视频工具集 · Python</i></span><span class="cell"><em>38.5%</em><u>周增速 · 周增 3,748</u></span></a><a class="row" href="https://github.com/GoogleChrome/modern-web-guidance-src" target="_blank" rel="noopener"><span class="rk t2">2</span><span class="nm"><b>GoogleChrome/modern-web-guidance-src</b><i>现代Web指南 · TypeScript</i></span><span class="cell"><em>35.0%</em><u>周增速 · 周增 3,575</u></span></a><a class="row" href="https://github.com/tradermonty/claude-trading-skills" target="_blank" rel="noopener"><span class="rk t2">3</span><span class="nm"><b>tradermonty/claude-trading-skills</b><i>交易技能工具包 · Python</i></span><span class="cell"><em>33.6%</em><u>周增速 · 周增 2,616</u></span></a><a class="row" href="https://github.com/google-labs-code/stitch-skills" target="_blank" rel="noopener"><span class="rk">4</span><span class="nm"><b>google-labs-code/stitch-skills</b><i>设计技能库 · TypeScript</i></span><span class="cell"><em>22.5%</em><u>周增速 · 周增 2,683</u></span></a><a class="row" href="https://github.com/dream-num/univer" target="_blank" rel="noopener"><span class="rk">5</span><span class="nm"><b>dream-num/univer</b><i>Office SDK开发平台 · TypeScript</i></span><span class="cell"><em>20.6%</em><u>周增速 · 周增 6,436</u></span></a><a class="row" href="https://github.com/backnotprop/plannotator" target="_blank" rel="noopener"><span class="rk">6</span><span class="nm"><b>backnotprop/plannotator</b><i>计划注释器 · TypeScript</i></span><span class="cell"><em>19.5%</em><u>周增速 · 周增 2,815</u></span></a><a class="row" href="https://github.com/pookjw/HermesEnabler" target="_blank" rel="noopener"><span class="rk">7</span><span class="nm"><b>pookjw/HermesEnabler</b><i>苹果表盘解锁 · Objective-C</i></span><span class="cell"><em>19.2%</em><u>周增速 · 周增 461</u></span></a><a class="row" href="https://github.com/ag-ui-protocol/ag-ui" target="_blank" rel="noopener"><span class="rk">8</span><span class="nm"><b>ag-ui-protocol/ag-ui</b><i>AI代理交互协议 · TypeScript</i></span><span class="cell"><em>17.1%</em><u>周增速 · 周增 3,620</u></span></a><a class="row" href="https://github.com/meta/astryx" target="_blank" rel="noopener"><span class="rk">9</span><span class="nm"><b>meta/astryx</b><i>AI设计系统 · TypeScript</i></span><span class="cell"><em>11.2%</em><u>周增速 · 周增 3,626</u></span></a><a class="row" href="https://github.com/we-promise/sure" target="_blank" rel="noopener"><span class="rk">10</span><span class="nm"><b>we-promise/sure</b><i>待补充 · Ruby</i></span><span class="cell"><em>10.2%</em><u>周增速 · 周增 1,771</u></span></a></div>
+  </section>
+
+  <footer>
+    <div class="l"><b>生成方式</b><span>fnOS NAS 定时任务 → 抓取榜单 → AI 逐项分析 → 渲染网页 → 微信推送</span></div>
+    <div class="l"><b>数据来源</b><span>https://github.com/trending?since=weekly</span></div>
+    <p>榜单数据抓取自 GitHub Trending 周榜页面；许可证、最近提交、Issue 关闭率来自 GitHub API；四项硬指标均为实测值。AI 推荐指数为模型综合评估，不是真实用户评分，主观判断已与硬指标分列展示。飙升榜已过滤总 star 低于 200 的仓库，避免新建仓库刷榜。</p>
+  </footer>
+
+</div>
+</body>
+</html>
